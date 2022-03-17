@@ -9,11 +9,15 @@ router.get(
   userMiddlewares.getUserFromToken,
   userControllers.getUser
 );
+
+router.post("/send-code", userControllers.sendRecoveryCode);
+
 // router.put(
 //   "/edit",
 //   userMiddlewares.checkIsPasswordNotEmptyMiddleware,
 //   userControllers.changePassword
 // );
+
 router.delete(
   "/delete",
   userMiddlewares.checkAccessTokenMiddleware,
