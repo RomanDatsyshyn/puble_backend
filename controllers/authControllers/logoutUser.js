@@ -1,10 +1,10 @@
-const OAuthModel = require("../../database/models/OAuthToken");
+const { OAuthToken } = require("../../database/models");
 
 module.exports = async (req, res) => {
   try {
     const token = req.get("Authorization");
 
-    await OAuthModel.deleteOne({ access_token: token });
+    await OAuthToken.deleteOne({ access_token: token });
 
     res.status(204).end();
   } catch (e) {

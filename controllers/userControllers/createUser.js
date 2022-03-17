@@ -1,6 +1,6 @@
 const { USER_ROLES, USER_STATUS } = require("../../constants");
 const { passwordHasher } = require("../../helpers");
-const User = require("../../database/models/User");
+const { User } = require("../../database/models");
 
 module.exports = async (req, res) => {
   try {

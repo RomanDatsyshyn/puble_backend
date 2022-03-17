@@ -1,9 +1,9 @@
-const OAuthModel = require("../../database/models/OAuthToken");
+const { OAuthToken } = require("../../database/models");
 
 module.exports = async (req, res, next) => {
   const token = req.get("Authorization");
 
-  const userFromAccessToken = await OAuthModel.find({
+  const userFromAccessToken = await OAuthToken.find({
     access_token: token,
   });
 

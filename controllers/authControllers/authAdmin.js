@@ -1,14 +1,13 @@
-const UserModel = require("../../database/models/User");
-const OAuthModel = require("../../database/models/OAuthToken");
+const { OAuthToken, User } = require("../../database/models");
 const { tokenizer, checkPasswordHash } = require("../../helpers");
-const { USER_ROLES, USER_STATUS, JWT_METHOD } = require("../../constants");
+const { USER_ROLES, JWT_METHOD } = require("../../constants");
 
 module.exports = async (req, res) => {
   try {
     const { phone, password } = req.body;
 
-    const isUserPresent = await UserModel.find({
-      phone: phone,
+    const isUserPresent = await User.find({
+      phone,
       role_id: USER_ROLES.ADMIN,
     });
 
@@ -24,7 +23,7 @@ module.exports = async (req, res) => {
 
     const tokens = tokenizer("ADMIN", JWT_METHOD.ADMIN);
 
-    const newOAuth = new OAuthModel({
+    const newOAuth = new OAuthToken({
       user_id: isUserPresent[0].id,
       ...tokens,
     });

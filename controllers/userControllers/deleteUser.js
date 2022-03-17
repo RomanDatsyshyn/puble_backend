@@ -1,11 +1,10 @@
-const User = require("../../database/models/User");
-const OAuthModel = require("../../database/models/OAuthToken");
+const { User, OAuthToken } = require("../../database/models");
 
 module.exports = async (req, res) => {
   try {
     const token = req.get("Authorization");
 
-    await OAuthModel.deleteOne({ access_token: token });
+    await OAuthToken.deleteOne({ access_token: token });
 
     await User.deleteOne({ _id: req.user });
 
