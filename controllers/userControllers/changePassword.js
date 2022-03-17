@@ -3,12 +3,11 @@ const { passwordHasher } = require("../../helpers");
 
 module.exports = async (req, res) => {
   try {
-    const hashedPassword = await passwordHasher(req.body.password);
+    const { password, email } = req.body;
 
-    await User.updateOne(
-      { _id: req.user },
-      { $set: { password: hashedPassword } }
-    );
+    const hashedPassword = await passwordHasher(password);
+
+    await User.updateOne({ email }, { $set: { password: hashedPassword } });
 
     res.status(200).end();
   } catch (e) {

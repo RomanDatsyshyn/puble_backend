@@ -12,11 +12,11 @@ router.get(
 
 router.post("/send-code", userControllers.sendRecoveryCode);
 
-// router.put(
-//   "/edit",
-//   userMiddlewares.checkIsPasswordNotEmptyMiddleware,
-//   userControllers.changePassword
-// );
+router.put(
+  "/change-password",
+  userMiddlewares.checkIsPasswordNotEmptyMiddleware,
+  userControllers.changePassword
+);
 
 router.delete(
   "/delete",
