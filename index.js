@@ -19,12 +19,14 @@ const {
   authRouter,
   adminRouter,
   categoryRouter,
+  serviceRouter,
   serviceSellerRouter,
 } = require("./routes");
 
 app.use("/auth", authRouter);
 app.use("/user", userRouter);
 app.use("/admin", adminRouter);
+app.use("/service", serviceRouter);
 app.use("/category", categoryRouter);
 app.use("/serviceSeller", serviceSellerRouter);
 

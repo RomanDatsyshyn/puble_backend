@@ -2,7 +2,10 @@ const { Category } = require("../../database/models");
 
 module.exports = async (req, res) => {
   try {
-    const categories = await Category.find({});
+    const categories = await Category.find({}).populate("services", {
+      name: 1,
+      icon: 1,
+    });
 
     res.status(200).json({
       success: true,
