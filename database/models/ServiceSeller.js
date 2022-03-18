@@ -32,10 +32,13 @@ const serviceSellerScheme = new Schema({
     type: String,
     required: true,
   },
-  category: {
-    type: String,
-    required: true,
-  },
+  categories: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Categories",
+      required: true,
+    },
+  ],
   rating: {
     type: Number,
     require: false,

@@ -6,16 +6,16 @@ const categoryScheme = new Schema({
     type: String,
     require: true,
   },
+  icon: {
+    type: String,
+    required: false,
+  },
   services: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Services",
     },
   ],
-  icon: {
-    type: String,
-    required: true,
-  },
 });
 
 categoryScheme.set("toJSON", {
