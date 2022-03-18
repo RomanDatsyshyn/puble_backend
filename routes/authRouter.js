@@ -8,9 +8,18 @@ router.post(
   authMiddlewares.checkIsUserPresentMiddleware,
   authControllers.authUser
 );
+
 router.post(
   "/logout",
   userMiddlewares.checkAccessTokenMiddleware,
+  authControllers.logoutUser
+);
+
+router.post("/admin", authControllers.authAdmin);
+
+router.post(
+  "/admin/logout",
+  authMiddlewares.checkAdminTokenMiddleware,
   authControllers.logoutUser
 );
 
