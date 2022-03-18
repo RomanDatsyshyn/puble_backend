@@ -3,7 +3,7 @@ const router = require("express").Router();
 const { serviceControllers } = require("../controllers");
 const { authMiddlewares } = require("../middlewares");
 
-router.use(authMiddlewares.checkAdminTokenMiddleware);
+router.use(authMiddlewares.checkAdminToken);
 
 router.post("/", serviceControllers.addService);
 router.put("/changeName", serviceControllers.changeName);

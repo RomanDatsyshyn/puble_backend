@@ -3,11 +3,8 @@ const router = require("express").Router();
 const { adminControllers } = require("../controllers");
 const { authMiddlewares } = require("../middlewares");
 
-router.use(authMiddlewares.checkAdminTokenMiddleware);
-router.use(
-  "/users/:user_id",
-  authMiddlewares.checkIsUserPresentMiddlewareAdminPanel
-);
+router.use(authMiddlewares.checkAdminToken);
+router.use("/users/:user_id", authMiddlewares.checkIsUserPresentAdminPanel);
 
 router.put("/users/:user_id/block", adminControllers.blockUser);
 

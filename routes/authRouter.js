@@ -3,27 +3,23 @@ const router = require("express").Router();
 const { authControllers } = require("../controllers");
 const { authMiddlewares, userMiddlewares } = require("../middlewares");
 
-router.post(
-  "/",
-  authMiddlewares.checkIsUserPresentMiddleware,
-  authControllers.authUser
-);
+router.post("/", authMiddlewares.checkIsUserPresent, authControllers.authUser);
 
 router.post(
   "/logout",
-  userMiddlewares.checkAccessTokenMiddleware,
+  userMiddlewares.checkAccessToken,
   authControllers.logoutUser
 );
 
 router.post(
   "/serviceSeller",
-  authMiddlewares.checkIsServiceSellerPresentMiddleware,
+  authMiddlewares.checkIsServiceSellerPresent,
   authControllers.authServiceSeller
 );
 
 router.post(
   "/serviceSeller/logout",
-  authMiddlewares.checkServiceSellerTokenMiddleware,
+  authMiddlewares.checkServiceSellerToken,
   authControllers.logoutUser
 );
 
@@ -31,7 +27,7 @@ router.post("/admin", authControllers.authAdmin);
 
 router.post(
   "/admin/logout",
-  authMiddlewares.checkAdminTokenMiddleware,
+  authMiddlewares.checkAdminToken,
   authControllers.logoutUser
 );
 

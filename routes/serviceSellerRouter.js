@@ -5,20 +5,20 @@ const { authMiddlewares, serviceSellerMiddlewares } = require("../middlewares");
 
 router.get(
   "/",
-  serviceSellerMiddlewares.checkAccessTokenMiddleware,
+  serviceSellerMiddlewares.checkAccessToken,
   serviceSellerMiddlewares.getServiceSellerFromToken,
   serviceSellerControllers.getServiceSeller
 );
 
 router.put(
   "/change-password",
-  serviceSellerMiddlewares.checkIsPasswordNotEmptyMiddleware,
+  serviceSellerMiddlewares.checkIsPasswordNotEmpty,
   serviceSellerControllers.changePassword
 );
 
 router.delete(
   "/delete",
-  serviceSellerMiddlewares.checkAccessTokenMiddleware,
+  serviceSellerMiddlewares.checkAccessToken,
   serviceSellerMiddlewares.getServiceSellerFromToken,
   serviceSellerControllers.deleteServiceSeller
 );
@@ -26,15 +26,15 @@ router.delete(
 router.post("/send-code", userControllers.sendRecoveryCode);
 
 router.use(
-  serviceSellerMiddlewares.uploadServiceSellerPhotoMiddleware.single(
+  serviceSellerMiddlewares.uploadServiceSellerPhoto.single(
     "serviceSellersPhoto"
   )
 );
 
 router.post(
   "/",
-  authMiddlewares.checkIsServiceSellerDataNotEmptyMiddleware,
-  authMiddlewares.checkIsServiceSellerPhoneUniqueMiddleware,
+  authMiddlewares.checkIsServiceSellerDataNotEmpty,
+  authMiddlewares.checkIsServiceSellerPhoneUnique,
   serviceSellerControllers.createServiceSeller
 );
 

@@ -1,4 +1,4 @@
-module.exports.getServiceSellerFromToken = require("./getServiceSellerFromToken.middleware");
-module.exports.checkIsPasswordNotEmptyMiddleware = require("./checkIsPasswordNotEmpty.middleware");
-module.exports.checkAccessTokenMiddleware = require("./checkAccessToken.middleware");
-module.exports.uploadServiceSellerPhotoMiddleware = require("./uploadServiceSellerPhoto.middleware");
+module.exports.getServiceSellerFromToken = require("./getServiceSellerFromToken");
+module.exports.checkIsPasswordNotEmpty = require("./checkIsPasswordNotEmpty");
+module.exports.checkAccessToken = require("./checkAccessToken");
+module.exports.uploadServiceSellerPhoto = require("./uploadServiceSellerPhoto");
