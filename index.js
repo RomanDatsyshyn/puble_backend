@@ -18,12 +18,14 @@ const {
   userRouter,
   authRouter,
   adminRouter,
+  categoryRouter,
   serviceSellerRouter,
 } = require("./routes");
 
 app.use("/auth", authRouter);
 app.use("/user", userRouter);
 app.use("/admin", adminRouter);
+app.use("/category", categoryRouter);
 app.use("/serviceSeller", serviceSellerRouter);
 
 app.use("/usersPhoto", express.static("usersPhoto"));
