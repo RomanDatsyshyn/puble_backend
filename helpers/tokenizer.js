@@ -17,7 +17,7 @@ module.exports = (id, method) => {
     };
   }
 
-  if (method === JWT_METHOD.USER) {
+  if (method === JWT_METHOD.USER || method === JWT_METHOD.SERVICESELLER) {
     const access_token = jwt.sign({ id }, JWT_SECRET.ACCESS, {
       expiresIn: "24h",
     });

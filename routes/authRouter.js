@@ -15,6 +15,18 @@ router.post(
   authControllers.logoutUser
 );
 
+router.post(
+  "/serviceSeller",
+  authMiddlewares.checkIsServiceSellerPresentMiddleware,
+  authControllers.authServiceSeller
+);
+
+router.post(
+  "/serviceSeller/logout",
+  authMiddlewares.checkServiceSellerTokenMiddleware,
+  authControllers.logoutUser
+);
+
 router.post("/admin", authControllers.authAdmin);
 
 router.post(

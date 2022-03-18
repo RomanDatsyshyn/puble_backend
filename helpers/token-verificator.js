@@ -17,7 +17,7 @@ module.exports = (res, next, token, method) => {
     });
   }
 
-  if (method === JWT_METHOD.USER) {
+  if (method === JWT_METHOD.USER || method === JWT_METHOD.SERVICESELLER) {
     jwt.verify(token, JWT_SECRET.ACCESS, (err) => {
       if (err) {
         return next(
