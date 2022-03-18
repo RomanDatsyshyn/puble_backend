@@ -14,10 +14,16 @@ app.use(express.urlencoded({ extended: true }));
 
 global.appRoot = __dirname;
 
-const { userRouter, authRouter, serviceSellerRouter } = require("./routes");
+const {
+  userRouter,
+  authRouter,
+  adminRouter,
+  serviceSellerRouter,
+} = require("./routes");
 
 app.use("/auth", authRouter);
 app.use("/user", userRouter);
+app.use("/admin", adminRouter);
 app.use("/serviceSeller", serviceSellerRouter);
 
 app.use("/usersPhoto", express.static("usersPhoto"));
