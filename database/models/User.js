@@ -32,6 +32,12 @@ const userScheme = new Schema({
     type: String,
     required: true,
   },
+  feed: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Offers",
+    },
+  ],
 });
 
 userScheme.set("toJSON", {
