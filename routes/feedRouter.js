@@ -52,8 +52,10 @@ router.post("/user/sendOrder/:category_id", async (req, res) => {
       const serviceSeller = await ServiceSeller.findById(s._id);
       serviceSeller.feed = serviceSeller.feed.concat(savedOrder._id);
       await serviceSeller.save();
-      const message = req.body;
-      emitter.emit(`serviceSellerFeed-${serviceSeller._id}`, message);
+      emitter.emit(
+        `serviceSellerFeed-${serviceSeller._id}`,
+        serviceSeller.feed.reverse()
+      );
     });
 
     res.status(200);
@@ -94,8 +96,7 @@ router.post("/serviceSeller/sendOffer", async (req, res) => {
     user.feed = user.feed.concat(savedOffer._id);
     await user.save();
 
-    const message = req.body;
-    emitter.emit(`userFeed-${user._id}`, message);
+    emitter.emit(`userFeed-${user._id}`, user.feed.reverse());
     res.status(200);
   } catch (e) {
     res.json({
