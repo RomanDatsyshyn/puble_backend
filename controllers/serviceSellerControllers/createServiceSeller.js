@@ -22,6 +22,12 @@ module.exports = async (req, res) => {
 
       const newServiceSeller = new ServiceSeller(serviceSeller);
 
+      if (serviceSeller.categories !== undefined) {
+        JSON.parse(serviceSeller.categories).map((c) => {
+          newServiceSeller.categories = newServiceSeller.categories.concat(c);
+        });
+      }
+
       await newServiceSeller.save();
 
       res.status(201).end();
