@@ -25,6 +25,8 @@ router.delete(
   userControllers.deleteUser
 );
 
+router.put("/change-rating", userControllers.changeRating);
+
 router.use(userMiddlewares.uploadUserPhoto.single("usersPhoto"));
 
 router.post(
