@@ -16,6 +16,13 @@ router.put(
   serviceSellerControllers.changePassword
 );
 
+router.put(
+  "/change-categories",
+  serviceSellerMiddlewares.checkAccessToken,
+  serviceSellerMiddlewares.getServiceSellerFromToken,
+  serviceSellerControllers.changeCategories
+);
+
 router.delete(
   "/delete",
   serviceSellerMiddlewares.checkAccessToken,
