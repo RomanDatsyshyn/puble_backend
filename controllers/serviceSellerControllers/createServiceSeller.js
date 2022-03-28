@@ -1,6 +1,6 @@
 const { USER_ROLES, USER_STATUS } = require("../../constants");
 const { passwordHasher } = require("../../helpers");
-const { ServiceSeller } = require("../../database/models");
+const { ServiceSeller, Service } = require("../../database/models");
 
 module.exports = async (req, res) => {
   try {
@@ -29,6 +29,20 @@ module.exports = async (req, res) => {
       }
 
       await newServiceSeller.save();
+
+      if (serviceSeller.categories !== undefined) {
+        JSON.parse(serviceSeller.categories).map(async (c) => {
+          const serviceData = await Service.findById(c);
+          serviceData.sellers = serviceData.sellers.concat(
+            newServiceSeller._id
+          );
+
+          await Service.updateOne(
+            { _id: serviceData._id },
+            { $set: { sellers: serviceData.sellers } }
+          );
+        });
+      }
 
       res.status(201).end();
     }

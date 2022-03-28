@@ -10,6 +10,13 @@ const serviceScheme = new Schema({
     type: String,
     required: true,
   },
+  sellers: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "ServiceSellers",
+      required: false,
+    },
+  ],
 });
 
 serviceScheme.set("toJSON", {

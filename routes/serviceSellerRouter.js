@@ -17,10 +17,17 @@ router.put(
 );
 
 router.put(
-  "/change-categories",
+  "/add-category/:id",
   serviceSellerMiddlewares.checkAccessToken,
   serviceSellerMiddlewares.getServiceSellerFromToken,
-  serviceSellerControllers.changeCategories
+  serviceSellerControllers.addCategory
+);
+
+router.put(
+  "/delete-category/:id",
+  serviceSellerMiddlewares.checkAccessToken,
+  serviceSellerMiddlewares.getServiceSellerFromToken,
+  serviceSellerControllers.deleteCategory
 );
 
 router.delete(
