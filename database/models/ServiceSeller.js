@@ -36,7 +36,13 @@ const serviceSellerScheme = new Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Categories",
-      required: true,
+      required: false,
+    },
+  ],
+  feed: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Orders",
     },
   ],
   rating: {
