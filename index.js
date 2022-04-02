@@ -36,6 +36,7 @@ app.use("/feed", feedRouter);
 
 app.use("/usersPhoto", express.static("usersPhoto"));
 app.use("/serviceSellersPhoto", express.static("serviceSellersPhoto"));
+app.use("/static", express.static("static"));
 
 const server = http.createServer(app);
 
