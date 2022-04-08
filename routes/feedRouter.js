@@ -1,12 +1,10 @@
 const router = require("express").Router();
 
-const { orderControllers, offerControllers } = require("../controllers");
 const { serviceSellerMiddlewares } = require("../middlewares");
 
 const { Offer, User, Order, ServiceSeller } = require("../database/models");
 
 const events = require("events");
-
 const emitter = new events.EventEmitter();
 
 router.use(serviceSellerMiddlewares.checkAccessToken);
@@ -42,9 +40,7 @@ router.post("/user/sendOrder/:category_id", async (req, res) => {
 
     serviceSellers.map((s) => {
       s.categories.map((c) => {
-        if (c == category_id) {
-          avaliableServiceSellers.push(s);
-        }
+        if (c == category_id) avaliableServiceSellers.push(s);
       });
     });
 
@@ -97,6 +93,7 @@ router.post("/serviceSeller/sendOffer", async (req, res) => {
     await user.save();
 
     emitter.emit(`userFeed-${user._id}`, user.feed.reverse());
+
     res.status(200);
   } catch (e) {
     res.json({

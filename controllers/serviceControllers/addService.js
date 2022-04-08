@@ -2,13 +2,12 @@ const { Service, Category } = require("../../database/models");
 
 module.exports = async (req, res) => {
   try {
-    const { name, icon, categoryId } = req.body;
+    const { name, categoryId } = req.body;
 
     const category = await Category.findById(categoryId);
 
     const service = new Service({
       name,
-      icon,
     });
 
     const savedService = await service.save();

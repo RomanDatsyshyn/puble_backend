@@ -6,10 +6,6 @@ const serviceScheme = new Schema({
     type: String,
     require: true,
   },
-  icon: {
-    type: String,
-    required: true,
-  },
   sellers: [
     {
       type: mongoose.Schema.Types.ObjectId,

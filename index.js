@@ -29,10 +29,8 @@ app.use("/feed", feedRouter);
 app.use("/user", userRouter);
 app.use("/admin", adminRouter);
 app.use("/service", serviceRouter);
-app.use("/category", categoryRouter);
+app.use("/categories", categoryRouter);
 app.use("/serviceSeller", serviceSellerRouter);
-
-app.use("/feed", feedRouter);
 
 app.use("/usersPhoto", express.static("usersPhoto"));
 app.use("/serviceSellersPhoto", express.static("serviceSellersPhoto"));
