@@ -19,14 +19,12 @@ const {
   userRouter,
   authRouter,
   adminRouter,
-  feedRouter,
   categoryRouter,
   serviceRouter,
   serviceSellerRouter,
 } = require("./routes");
 
 app.use("/auth", authRouter);
-app.use("/feed", feedRouter);
 app.use("/user", userRouter);
 app.use("/admin", adminRouter);
 app.use("/service", serviceRouter);
@@ -40,39 +38,58 @@ app.use("/static", express.static("static"));
 const server = http.createServer(app);
 const io = socketio(server);
 
-const {
-  getActiveUser,
-  exitRoom,
-  newUser,
-  getIndividualRoomUsers,
-} = require("./helpers/userHelper");
-const formatMessage = require("./helpers/formatMessage");
+const { User, Order, Offer, ServiceSeller } = require("./database/models");
 
 io.on("connection", (socket) => {
-  socket.on("join", ({ username, room }) => {
-    newUser(socket.id, username, room);
-    socket.join(room);
+  socket.on("join", ({ room }) => socket.join(room));
 
-    socket.emit(
-      "message",
-      formatMessage(username, "Messages are limited to this room! ")
-    );
+  socket.on("sendUserOrderToServiceSellers", async ({ userId, serviceId }) => {
+    const order = new Order({
+      user: userId,
+      date: Date.now(),
+      isCompleted: false,
+    });
 
-    socket.broadcast
-      .to(room)
-      .emit(
+    const savedOrder = await order.save();
+
+    let avaliableServiceSellers = [];
+
+    const serviceSellers = await ServiceSeller.find({});
+
+    serviceSellers.map((s) => {
+      // Replace categories to services
+      s.categories.map((c) => {
+        if (c == serviceId) avaliableServiceSellers.push(s);
+      });
+    });
+
+    avaliableServiceSellers.map(async (s) => {
+      const serviceSeller = await ServiceSeller.findById(s._id);
+      serviceSeller.feed = serviceSeller.feed.concat(savedOrder._id);
+      await serviceSeller.save();
+      io.to(`serviceSellerFeed-${serviceSeller._id}`).emit(
         "message",
-        formatMessage(username, `${username} has joined the room`)
+        serviceSeller.feed.reverse()
       );
-
-    io.to(room).emit("getUsers", {
-      users: getIndividualRoomUsers(room),
     });
   });
 
-  socket.on("chatMessage", ({ username, room, msg }) => {
-    io.to(room).emit("message", formatMessage(username, msg));
-  });
+  socket.on(
+    "sendServiceSellerOfferToUser",
+    async ({ userId, serviceSellerId }) => {
+      const offer = new Offer({
+        serviceSeller: serviceSellerId,
+      });
+
+      const savedOffer = await offer.save();
+
+      const user = await User.findById(userId);
+      user.feed = user.feed.concat(savedOffer._id);
+      await user.save();
+
+      io.to(`userFeed-${user._id}`).emit("message", user.feed.reverse());
+    }
+  );
 
   // socket.on("disconnect", () => {
   //   const user = exitRoom(socket.id);
