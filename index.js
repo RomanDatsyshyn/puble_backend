@@ -61,10 +61,9 @@ io.on("connection", (socket) => {
 
       const serviceSellers = await ServiceSeller.find({});
 
-      serviceSellers.map((s) => {
-        // Replace categories to services
-        s.categories.map((c) => {
-          if (c == serviceId) avaliableServiceSellers.push(s);
+      serviceSellers.map((seller) => {
+        seller.services.map((id) => {
+          if (id == serviceId) avaliableServiceSellers.push(seller);
         });
       });
 

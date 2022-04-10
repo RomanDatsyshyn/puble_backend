@@ -32,10 +32,10 @@ const serviceSellerScheme = new Schema({
     type: String,
     required: true,
   },
-  categories: [
+  services: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Categories",
+      ref: "Services",
       required: false,
     },
   ],
