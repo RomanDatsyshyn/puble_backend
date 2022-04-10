@@ -45,6 +45,12 @@ const serviceSellerScheme = new Schema({
       ref: "Orders",
     },
   ],
+  chats: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Chat",
+    },
+  ],
   rating: {
     type: Number,
     require: false,

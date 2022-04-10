@@ -38,6 +38,12 @@ const userScheme = new Schema({
       ref: "Offers",
     },
   ],
+  chats: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Chat",
+    },
+  ],
 });
 
 userScheme.set("toJSON", {
