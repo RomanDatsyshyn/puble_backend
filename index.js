@@ -41,71 +41,69 @@ const io = socketio(server);
 const { User, Order, Offer, ServiceSeller } = require("./database/models");
 
 io.on("connection", (socket) => {
-  socket.on("join", ({ room }) => socket.join(room));
+  try {
+    socket.on("join", ({ room }) => socket.join(room));
+  } catch (error) {
+    console.log(error);
+  }
 
   socket.on("sendUserOrderToServiceSellers", async ({ userId, serviceId }) => {
-    const order = new Order({
-      user: userId,
-      date: Date.now(),
-      isCompleted: false,
-    });
-
-    const savedOrder = await order.save();
-
-    let avaliableServiceSellers = [];
-
-    const serviceSellers = await ServiceSeller.find({});
-
-    serviceSellers.map((s) => {
-      // Replace categories to services
-      s.categories.map((c) => {
-        if (c == serviceId) avaliableServiceSellers.push(s);
+    try {
+      const order = new Order({
+        user: userId,
+        date: Date.now(),
+        isCompleted: false,
       });
-    });
 
-    avaliableServiceSellers.map(async (s) => {
-      const serviceSeller = await ServiceSeller.findById(s._id);
-      serviceSeller.feed = serviceSeller.feed.concat(savedOrder._id);
-      await serviceSeller.save();
-      io.to(`serviceSellerFeed-${serviceSeller._id}`).emit(
-        "message",
-        serviceSeller.feed.reverse()
-      );
-    });
+      const savedOrder = await order.save();
+
+      let avaliableServiceSellers = [];
+
+      const serviceSellers = await ServiceSeller.find({});
+
+      serviceSellers.map((s) => {
+        // Replace categories to services
+        s.categories.map((c) => {
+          if (c == serviceId) avaliableServiceSellers.push(s);
+        });
+      });
+
+      avaliableServiceSellers.map(async (s) => {
+        const serviceSeller = await ServiceSeller.findById(s._id);
+        serviceSeller.feed = serviceSeller.feed.concat(savedOrder._id);
+        await serviceSeller.save();
+        io.to(`serviceSellerFeed-${serviceSeller._id}`).emit(
+          "message",
+          serviceSeller.feed.reverse()
+        );
+      });
+    } catch (error) {
+      console.log(erorr);
+    }
   });
 
   socket.on(
     "sendServiceSellerOfferToUser",
     async ({ userId, serviceSellerId }) => {
-      const offer = new Offer({
-        serviceSeller: serviceSellerId,
-      });
+      try {
+        const offer = new Offer({
+          serviceSeller: serviceSellerId,
+        });
 
-      const savedOffer = await offer.save();
+        const savedOffer = await offer.save();
 
-      const user = await User.findById(userId);
-      user.feed = user.feed.concat(savedOffer._id);
-      await user.save();
+        const user = await User.findById(userId);
+        user.feed = user.feed.concat(savedOffer._id);
+        await user.save();
 
-      io.to(`userFeed-${user._id}`).emit("message", user.feed.reverse());
+        io.to(`userFeed-${user._id}`).emit("message", user.feed.reverse());
+      } catch (error) {
+        console.log(error);
+      }
     }
   );
 
-  // socket.on("disconnect", () => {
-  //   const user = exitRoom(socket.id);
-
-  //   if (user) {
-  //     io.to(user.room).emit(
-  //       "message",
-  //       formatMessage("WebCage", `${user.username} has left the room`)
-  //     );
-
-  //     // Current active users and room name
-  //     io.to(user.room).emit("roomUsers", {
-  //       users: getIndividualRoomUsers(user.room),
-  //     });
-  //   }
-  // });
+  socket.on("unsubscribe", ({ room }) => socket.leave(room));
 });
 
 server.listen(process.env.PORT, (err) =>
