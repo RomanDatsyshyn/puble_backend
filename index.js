@@ -83,7 +83,7 @@ io.on("connection", (socket) => {
 
   socket.on(
     "sendServiceSellerOfferToUser",
-    async ({ userId, serviceSellerId }) => {
+    async ({ userId, serviceSellerId, price }) => {
       try {
         const offer = new Offer({
           serviceSeller: serviceSellerId,
@@ -91,8 +91,19 @@ io.on("connection", (socket) => {
 
         const savedOffer = await offer.save();
 
+        const serviceSeller = await ServiceSeller.findById(serviceSellerId);
+        const { _id, name, rating, photo, profession } = serviceSeller;
+
         const user = await User.findById(userId);
-        user.feed = user.feed.concat(savedOffer._id);
+        user.feed = user.feed.concat({
+          id: _id,
+          name,
+          photo,
+          rating,
+          profession,
+          distance: "777 м.",
+          price,
+        });
         await user.save();
 
         io.to(`userFeed-${user._id}`).emit("message", user.feed.reverse());

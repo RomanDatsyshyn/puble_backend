@@ -2,20 +2,20 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const Message = new Schema({
-  text: {
-    type: String,
+  typeOfUser: {
+    type: Number,
     require: true,
   },
   time: {
     type: String,
     require: true,
   },
-  whoIsTheSender: {
+  text: {
     type: String,
     require: true,
   },
   status: {
-    type: String,
+    type: Number, // 0 - unread, 1 - read
     require: true,
   },
 });

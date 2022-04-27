@@ -32,12 +32,7 @@ const userScheme = new Schema({
     type: String,
     required: false,
   },
-  feed: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Offers",
-    },
-  ],
+  feed: [],
   chats: [
     {
       type: mongoose.Schema.Types.ObjectId,
