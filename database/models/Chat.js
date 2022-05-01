@@ -2,24 +2,8 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const Chat = new Schema({
-  name: {
+  serviceSellerId: {
     type: String,
-    require: true,
-  },
-  photo: {
-    type: String,
-    require: true,
-  },
-  lastMessage: {
-    type: String,
-    require: true,
-  },
-  timeOfLastMessage: {
-    type: String,
-    require: true,
-  },
-  amountOfNewMessages: {
-    type: Number,
     require: true,
   },
   messages: [
