@@ -92,7 +92,7 @@ io.on("connection", (socket) => {
         const savedOffer = await offer.save();
 
         const serviceSeller = await ServiceSeller.findById(serviceSellerId);
-        const { _id, name, rating, photo, profession } = serviceSeller;
+        const { _id, name, rating, photo } = serviceSeller;
 
         const user = await User.findById(userId);
         user.feed = user.feed.concat({
@@ -100,7 +100,6 @@ io.on("connection", (socket) => {
           name,
           photo,
           rating,
-          profession,
           distance: "777 м.",
         });
         await user.save();

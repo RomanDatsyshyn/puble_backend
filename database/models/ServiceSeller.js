@@ -11,10 +11,6 @@ const serviceSellerScheme = new Schema({
     require: true,
     unique: true,
   },
-  profession: {
-    type: String,
-    require: true,
-  },
   email: {
     type: String,
     require: true,
