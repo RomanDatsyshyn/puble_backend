@@ -33,12 +33,6 @@ const userScheme = new Schema({
     required: false,
   },
   feed: [],
-  chats: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Chat",
-    },
-  ],
 });
 
 userScheme.set("toJSON", {
