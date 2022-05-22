@@ -83,7 +83,7 @@ io.on("connection", (socket) => {
 
   socket.on(
     "sendServiceSellerOfferToUser",
-    async ({ userId, serviceSellerId, price }) => {
+    async ({ userId, serviceSellerId }) => {
       try {
         const offer = new Offer({
           serviceSeller: serviceSellerId,
@@ -102,7 +102,6 @@ io.on("connection", (socket) => {
           rating,
           profession,
           distance: "777 м.",
-          price,
         });
         await user.save();
 
