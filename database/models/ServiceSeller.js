@@ -45,14 +45,26 @@ const serviceSellerScheme = new Schema({
       ref: "Orders",
     },
   ],
-  chats: [
+  Feedbacks: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Chat",
+      ref: "Feedbacks",
     },
   ],
   rating: {
     type: Number,
+    require: false,
+  },
+  instagram: {
+    type: String,
+    require: false,
+  },
+  telegram: {
+    type: String,
+    require: false,
+  },
+  viber: {
+    type: String,
     require: false,
   },
 });
