@@ -67,6 +67,10 @@ const serviceSellerScheme = new Schema({
     type: String,
     require: false,
   },
+  isVerified: {
+    type: Boolean,
+    require: true,
+  },
 });
 
 serviceSellerScheme.set("toJSON", {
