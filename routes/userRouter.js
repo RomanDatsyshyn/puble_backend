@@ -10,7 +10,11 @@ router.get(
   userControllers.getUser
 );
 
-router.post("/send-code", userControllers.sendRecoveryCode);
+router.post(
+  "/send-code",
+  authMiddlewares.checkByEmailIsUserPresent,
+  userControllers.sendRecoveryCode
+);
 
 router.put(
   "/change-password",

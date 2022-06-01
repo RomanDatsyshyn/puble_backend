@@ -1,10 +1,10 @@
-const { emailSendler } = require("../../helpers");
+const { mailSendler } = require("../../helpers");
 
 module.exports = async (req, res) => {
   try {
     const { email } = req.body;
 
-    await emailSendler(res, email);
+    await mailSendler(res, email);
   } catch (e) {
     res.json({
       success: false,
