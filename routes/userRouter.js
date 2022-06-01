@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-const { userControllers, authControllers } = require("../controllers");
+const { userControllers } = require("../controllers");
 const { authMiddlewares, userMiddlewares } = require("../middlewares");
 
 router.get(
@@ -8,13 +8,6 @@ router.get(
   userMiddlewares.checkAccessToken,
   userMiddlewares.getUserFromToken,
   userControllers.getUser
-);
-
-router.get("/checkToken", authControllers.verifyToken);
-router.get(
-  "/checkToken",
-  authMiddlewares.checkIsUserPresent,
-  authControllers.refreshToken
 );
 
 router.post("/send-code", userControllers.sendRecoveryCode);

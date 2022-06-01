@@ -19,8 +19,9 @@ const {
   userRouter,
   authRouter,
   adminRouter,
-  categoryRouter,
   serviceRouter,
+  categoryRouter,
+  contactUsRouter,
   serviceSellerRouter,
 } = require("./routes");
 
@@ -29,6 +30,7 @@ app.use("/user", userRouter);
 app.use("/admin", adminRouter);
 app.use("/service", serviceRouter);
 app.use("/categories", categoryRouter);
+app.use("/contactUs", contactUsRouter);
 app.use("/serviceSeller", serviceSellerRouter);
 
 app.use("/usersPhoto", express.static("usersPhoto"));
