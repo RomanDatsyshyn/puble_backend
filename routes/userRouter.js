@@ -10,6 +10,12 @@ router.get(
   userControllers.getUser
 );
 
+router.put(
+  "/updatePassword",
+  userMiddlewares.checkAccessToken,
+  userControllers.updatePassword
+);
+
 router.post(
   "/send-code",
   authMiddlewares.checkByEmailIsUserPresent,
