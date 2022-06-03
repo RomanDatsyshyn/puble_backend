@@ -31,8 +31,6 @@ module.exports = async (req, res) => {
       text,
     });
 
-    console.log(item);
-
     await item.save();
 
     ss.Feedbacks = ss.Feedbacks.concat(item);
