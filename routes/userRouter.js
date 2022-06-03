@@ -16,6 +16,25 @@ router.put(
   userControllers.updatePassword
 );
 
+router.get(
+  "/history",
+  userMiddlewares.checkAccessToken,
+  userMiddlewares.getUserFromToken,
+  userControllers.getUserHistory
+);
+
+router.post(
+  "/updateHistory",
+  userMiddlewares.checkAccessToken,
+  userControllers.updateHistory
+);
+
+router.delete(
+  "/deleteHistoryItem",
+  userMiddlewares.checkAccessToken,
+  userControllers.deleteHistoryItem
+);
+
 router.post(
   "/send-code",
   authMiddlewares.checkByEmailIsUserPresent,

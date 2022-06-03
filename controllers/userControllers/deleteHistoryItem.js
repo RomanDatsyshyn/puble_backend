@@ -1,0 +1,33 @@
+const { UserHistory, OAuthToken } = require("../../database/models");
+
+module.exports = async (req, res) => {
+  try {
+    const token = req.get("Authorization");
+
+    const userFromAccessToken = await OAuthToken.find({
+      access_token: token,
+    });
+
+    if (!userFromAccessToken) {
+      return next(
+        res.json({
+          success: false,
+          data: null,
+          errors: "Немає користувача",
+        })
+      );
+    }
+
+    const { id: _id } = req.body;
+
+    await UserHistory.deleteOne({ _id });
+
+    res.status(200).end();
+  } catch (e) {
+    res.json({
+      success: false,
+      data: e.controller || "deleteHistoryItem",
+      errors: e.message,
+    });
+  }
+};

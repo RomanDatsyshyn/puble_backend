@@ -6,6 +6,10 @@ const serviceSellerScheme = new Schema({
     type: String,
     require: true,
   },
+  kindOfActivity: {
+    type: String,
+    require: true,
+  },
   phone: {
     type: String,
     require: true,

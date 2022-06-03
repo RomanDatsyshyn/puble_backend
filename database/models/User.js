@@ -32,7 +32,20 @@ const userScheme = new Schema({
     type: String,
     required: false,
   },
-  feed: [],
+  feed: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Orders",
+      required: false,
+    },
+  ],
+  history: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "UserHistory",
+      required: false,
+    },
+  ],
 });
 
 userScheme.set("toJSON", {

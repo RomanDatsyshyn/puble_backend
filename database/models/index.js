@@ -5,4 +5,5 @@ module.exports.Service = require("./Service");
 module.exports.Category = require("./Category");
 module.exports.ContactUs = require("./ContactUs");
 module.exports.OAuthToken = require("./OAuthToken");
+module.exports.UserHistory = require("./UserHistory");
 module.exports.ServiceSeller = require("./ServiceSeller");
