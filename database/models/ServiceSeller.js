@@ -56,8 +56,14 @@ const serviceSellerScheme = new Schema({
     },
   ],
   rating: {
-    type: Number,
-    require: false,
+    sum: {
+      type: Number,
+      require: true,
+    },
+    amount: {
+      type: Number,
+      require: true,
+    },
   },
   instagram: {
     type: String,

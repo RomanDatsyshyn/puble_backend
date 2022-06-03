@@ -11,7 +11,10 @@ module.exports = async (req, res) => {
     serviceSeller.role_id = USER_ROLES.SERVICESELLER;
     serviceSeller.status_id = USER_STATUS.ACTIVE;
     serviceSeller.password = await passwordHasher(serviceSeller.password);
-    serviceSeller.rating = 0;
+    serviceSeller.rating = {
+      sum: 0,
+      amount: 0,
+    };
     const newServiceSeller = new ServiceSeller(serviceSeller);
 
     await newServiceSeller.save();

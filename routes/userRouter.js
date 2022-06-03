@@ -36,6 +36,18 @@ router.post(
 );
 
 router.post(
+  "/addFeedBack",
+  userMiddlewares.checkAccessToken,
+  userControllers.addFeedBack
+);
+
+router.get(
+  "/getServiceSellerFeedBacks",
+  userMiddlewares.checkAccessToken,
+  userControllers.getServiceSellerFeedBacks
+);
+
+router.post(
   "/send-code",
   authMiddlewares.checkByEmailIsUserPresent,
   userControllers.sendRecoveryCode

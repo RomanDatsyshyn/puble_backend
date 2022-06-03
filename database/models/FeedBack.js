@@ -2,12 +2,8 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const feedBackScheme = new Schema({
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Users",
-  },
   date: {
-    type: Date,
+    type: String,
     required: true,
   },
   text: {
@@ -24,4 +20,4 @@ feedBackScheme.set("toJSON", {
   },
 });
 
-module.exports = mongoose.model("FeedBacks", feedBackScheme);
+module.exports = mongoose.model("Feedbacks", feedBackScheme);

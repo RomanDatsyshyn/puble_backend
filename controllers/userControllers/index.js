@@ -1,6 +1,7 @@
 module.exports.getUser = require("./getUser");
 module.exports.createUser = require("./createUser");
 module.exports.deleteUser = require("./deleteUser");
+module.exports.addFeedBack = require("./addFeedBack");
 module.exports.changeRating = require("./changeRating");
 module.exports.updateHistory = require("./updateHistory");
 module.exports.changePassword = require("./changePassword");
@@ -8,3 +9,4 @@ module.exports.updatePassword = require("./updatePassword");
 module.exports.getUserHistory = require("./getUserHistory");
 module.exports.sendRecoveryCode = require("./sendRecoveryCode");
 module.exports.deleteHistoryItem = require("./deleteHistoryItem");
+module.exports.getServiceSellerFeedBacks = require("./getServiceSellerFeedBacks");
