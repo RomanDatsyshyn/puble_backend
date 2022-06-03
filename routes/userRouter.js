@@ -42,8 +42,7 @@ router.post(
 );
 
 router.get(
-  "/getServiceSellerFeedBacks",
-  userMiddlewares.checkAccessToken,
+  "/getServiceSellerFeedBacks/:id",
   userControllers.getServiceSellerFeedBacks
 );
 

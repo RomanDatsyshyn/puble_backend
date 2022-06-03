@@ -1,8 +1,9 @@
-const { ServiceSeller, FeedBack } = require("../../database/models");
+const { ServiceSeller } = require("../../database/models");
 
 module.exports = async (req, res) => {
   try {
-    let { id } = req.query;
+    const { id } = req.params;
+    console.log(id, "id");
 
     const ss = await ServiceSeller.findById(id).populate("Feedbacks");
 
