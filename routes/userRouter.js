@@ -29,7 +29,7 @@ router.post(
   userControllers.updateHistory
 );
 
-router.delete(
+router.post(
   "/deleteHistoryItem",
   userMiddlewares.checkAccessToken,
   userControllers.deleteHistoryItem
