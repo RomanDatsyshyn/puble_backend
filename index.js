@@ -49,39 +49,42 @@ io.on("connection", (socket) => {
     console.log(error);
   }
 
-  socket.on("sendUserOrderToServiceSellers", async ({ userId, serviceId }) => {
-    try {
-      const order = new Order({
-        user: userId,
-        date: Date.now(),
-        isCompleted: false,
-      });
-
-      const savedOrder = await order.save();
-
-      let avaliableServiceSellers = [];
-
-      const serviceSellers = await ServiceSeller.find({});
-
-      serviceSellers.map((seller) => {
-        seller.services.map((id) => {
-          if (id == serviceId) avaliableServiceSellers.push(seller);
+  socket.on(
+    "sendUserOrderToServiceSellers",
+    async ({ userId, serviceId, date }) => {
+      try {
+        const order = new Order({
+          user: userId,
+          date: date,
+          isCompleted: false,
         });
-      });
 
-      avaliableServiceSellers.map(async (s) => {
-        const serviceSeller = await ServiceSeller.findById(s._id);
-        serviceSeller.feed = serviceSeller.feed.concat(savedOrder._id);
-        await serviceSeller.save();
-        io.to(`serviceSellerFeed-${serviceSeller._id}`).emit(
-          "message",
-          serviceSeller.feed.reverse()
-        );
-      });
-    } catch (error) {
-      console.log(erorr);
+        const savedOrder = await order.save();
+
+        let avaliableServiceSellers = [];
+
+        const serviceSellers = await ServiceSeller.find({});
+
+        serviceSellers.map((seller) => {
+          seller.services.map((id) => {
+            if (id == serviceId) avaliableServiceSellers.push(seller);
+          });
+        });
+
+        avaliableServiceSellers.map(async (s) => {
+          const serviceSeller = await ServiceSeller.findById(s._id);
+          serviceSeller.feed = serviceSeller.feed.concat(savedOrder._id);
+          await serviceSeller.save();
+          io.to(`serviceSellerFeed-${serviceSeller._id}`).emit(
+            "message",
+            serviceSeller.feed.reverse()
+          );
+        });
+      } catch (error) {
+        console.log(erorr);
+      }
     }
-  });
+  );
 
   socket.on(
     "sendServiceSellerOfferToUser",
