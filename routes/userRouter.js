@@ -23,6 +23,8 @@ router.get(
   userControllers.getUserHistory
 );
 
+router.get("/getSpecialistsAroundMe", userControllers.getSpecialistsAroundMe);
+
 router.post(
   "/updateHistory",
   userMiddlewares.checkAccessToken,

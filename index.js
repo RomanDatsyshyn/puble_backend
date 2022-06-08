@@ -51,7 +51,7 @@ io.on("connection", (socket) => {
 
   socket.on(
     "sendUserOrderToServiceSellers",
-    async ({ userId, serviceId, date }) => {
+    async ({ userId, serviceId, date, latitude, longitude }) => {
       try {
         const order = new Order({
           user: userId,

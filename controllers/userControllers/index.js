@@ -9,4 +9,5 @@ module.exports.updatePassword = require("./updatePassword");
 module.exports.getUserHistory = require("./getUserHistory");
 module.exports.sendRecoveryCode = require("./sendRecoveryCode");
 module.exports.deleteHistoryItem = require("./deleteHistoryItem");
+module.exports.getSpecialistsAroundMe = require("./getSpecialistsAroundMe");
 module.exports.getServiceSellerFeedBacks = require("./getServiceSellerFeedBacks");
