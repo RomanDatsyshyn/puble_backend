@@ -56,7 +56,9 @@ io.on("connection", (socket) => {
         const order = new Order({
           user: userId,
           date: date,
-          isCompleted: false,
+          isCompleted: false, // remove
+          latitude,
+          longitude,
         });
 
         const savedOrder = await order.save();
