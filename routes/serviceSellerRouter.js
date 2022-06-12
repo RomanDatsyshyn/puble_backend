@@ -17,6 +17,12 @@ router.put(
 );
 
 router.put(
+  "/updatePassword",
+  serviceSellerMiddlewares.checkAccessToken,
+  serviceSellerControllers.updatePassword
+);
+
+router.put(
   "/add-category/:id",
   serviceSellerMiddlewares.checkAccessToken,
   serviceSellerMiddlewares.getServiceSellerFromToken,
