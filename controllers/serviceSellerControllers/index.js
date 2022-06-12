@@ -6,3 +6,4 @@ module.exports.createPromocode = require("./createPromocode");
 module.exports.getServiceSeller = require("./getServiceSeller");
 module.exports.createServiceSeller = require("./createServiceSeller");
 module.exports.deleteServiceSeller = require("./deleteServiceSeller");
+module.exports.updateTypeOfActivity = require("./updateTypeOfActivity");

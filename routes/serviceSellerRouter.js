@@ -23,6 +23,12 @@ router.put(
 );
 
 router.put(
+  "/updateTypeOfActivity",
+  serviceSellerMiddlewares.checkAccessToken,
+  serviceSellerControllers.updateTypeOfActivity
+);
+
+router.put(
   "/add-category/:id",
   serviceSellerMiddlewares.checkAccessToken,
   serviceSellerMiddlewares.getServiceSellerFromToken,
