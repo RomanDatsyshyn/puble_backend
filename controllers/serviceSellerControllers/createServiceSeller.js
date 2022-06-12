@@ -12,8 +12,8 @@ module.exports = async (req, res) => {
     serviceSeller.status_id = USER_STATUS.ACTIVE;
     serviceSeller.password = await passwordHasher(serviceSeller.password);
     serviceSeller.rating = {
-      sum: 0,
-      amount: 0,
+      sum: 1,
+      amount: 1,
     };
     serviceSeller.isPremiumActive = false;
 
