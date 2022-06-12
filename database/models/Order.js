@@ -10,10 +10,6 @@ const orderScheme = new Schema({
     type: Date,
     required: true,
   },
-  isCompleted: {
-    type: Boolean,
-    required: true,
-  },
 });
 
 orderScheme.set("toJSON", {

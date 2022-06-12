@@ -1,6 +1,5 @@
 module.exports = async (req, res, next) => {
   const { name, email, phone, password } = req.body;
-  // const { name, email, phone, password, categories } = req.body;
 
   let errors = {};
 
@@ -20,18 +19,7 @@ module.exports = async (req, res, next) => {
     errors.password = "Введіть пароль";
   }
 
-  // if (!categories) {
-  //   console.log(categories);
-  //   errors.categories = "Оберіть категорію";
-  // }
-
-  if (
-    errors.name ||
-    errors.email ||
-    errors.phone ||
-    errors.password
-    //|| errors.categories
-  ) {
+  if (errors.name || errors.email || errors.phone || errors.password) {
     res.json({
       success: false,
       data: null,
@@ -55,13 +43,7 @@ module.exports = async (req, res, next) => {
     }
   }
 
-  if (
-    errors.name ||
-    errors.email ||
-    errors.phone ||
-    errors.password
-    // || errors.categories
-  ) {
+  if (errors.name || errors.email || errors.phone || errors.password) {
     res.json({
       success: false,
       data: null,

@@ -37,6 +37,8 @@ router.delete(
   serviceSellerControllers.deleteServiceSeller
 );
 
+router.post("/addPromo", serviceSellerControllers.createPromocode);
+
 router.post("/send-code", userControllers.sendRecoveryCode);
 
 router.use(

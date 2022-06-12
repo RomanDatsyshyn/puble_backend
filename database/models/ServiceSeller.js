@@ -81,6 +81,10 @@ const serviceSellerScheme = new Schema({
     type: Boolean,
     require: true,
   },
+  isPremiumActive: {
+    type: Boolean,
+    require: true,
+  },
 });
 
 serviceSellerScheme.set("toJSON", {

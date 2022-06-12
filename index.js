@@ -56,7 +56,6 @@ io.on("connection", (socket) => {
         const order = new Order({
           user: userId,
           date: date,
-          isCompleted: false, // remove
           latitude,
           longitude,
         });

@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
     const hashedPassword = await passwordHasher(password);
 
     await ServiceSeller.updateOne(
-      { email },
+      { email: email },
       { $set: { password: hashedPassword } }
     );
 

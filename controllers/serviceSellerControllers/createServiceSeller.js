@@ -1,6 +1,6 @@
 const { USER_ROLES, USER_STATUS } = require("../../constants");
 const { passwordHasher } = require("../../helpers");
-const { ServiceSeller, Service } = require("../../database/models");
+const { ServiceSeller } = require("../../database/models");
 
 module.exports = async (req, res) => {
   try {
@@ -15,21 +15,11 @@ module.exports = async (req, res) => {
       sum: 0,
       amount: 0,
     };
+    serviceSeller.isPremiumActive = false;
+
     const newServiceSeller = new ServiceSeller(serviceSeller);
 
     await newServiceSeller.save();
-
-    if (serviceSeller.services !== []) {
-      serviceSeller.services.map(async (s) => {
-        const serviceData = await Service.findById(s);
-        serviceData.sellers = serviceData.sellers.concat(newServiceSeller._id);
-
-        await Service.updateOne(
-          { _id: serviceData._id },
-          { $set: { sellers: serviceData.sellers } }
-        );
-      });
-    }
 
     res.status(201).end();
   } catch (e) {
