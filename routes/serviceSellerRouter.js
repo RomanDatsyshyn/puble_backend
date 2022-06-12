@@ -29,6 +29,12 @@ router.put(
 );
 
 router.put(
+  "/updateMyContacts",
+  serviceSellerMiddlewares.checkAccessToken,
+  serviceSellerControllers.updateMyContacts
+);
+
+router.put(
   "/add-category/:id",
   serviceSellerMiddlewares.checkAccessToken,
   serviceSellerMiddlewares.getServiceSellerFromToken,

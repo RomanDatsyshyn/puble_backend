@@ -67,15 +67,15 @@ const serviceSellerScheme = new Schema({
   },
   instagram: {
     type: String,
-    require: false,
+    require: true,
   },
   telegram: {
     type: String,
-    require: false,
+    require: true,
   },
   viber: {
     type: String,
-    require: false,
+    require: true,
   },
   isVerified: {
     type: Boolean,

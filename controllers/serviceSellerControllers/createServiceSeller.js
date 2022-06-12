@@ -16,6 +16,9 @@ module.exports = async (req, res) => {
       amount: 1,
     };
     serviceSeller.isPremiumActive = false;
+    serviceSeller.instagram = "";
+    serviceSeller.telegram = "";
+    serviceSeller.viber = "";
 
     const newServiceSeller = new ServiceSeller(serviceSeller);
 
