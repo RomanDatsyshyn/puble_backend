@@ -1,18 +1,18 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const orderScheme = new Schema({
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Users",
-  },
+const feedBackScheme = new Schema({
   date: {
-    type: Date,
+    type: String,
+    required: true,
+  },
+  text: {
+    type: String,
     required: true,
   },
 });
 
-orderScheme.set("toJSON", {
+feedBackScheme.set("toJSON", {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString();
     delete returnedObject._id;
@@ -20,4 +20,4 @@ orderScheme.set("toJSON", {
   },
 });
 
-module.exports = mongoose.model("Orders", orderScheme);
+module.exports = mongoose.model("Feedbacks", feedBackScheme);

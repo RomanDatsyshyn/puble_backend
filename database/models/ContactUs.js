@@ -1,21 +1,22 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const serviceScheme = new Schema({
+const contactUsScheme = new Schema({
   name: {
     type: String,
     require: true,
   },
-  sellers: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "ServiceSellers",
-      required: false,
-    },
-  ],
+  title: {
+    type: String,
+    require: true,
+  },
+  text: {
+    type: String,
+    require: true,
+  },
 });
 
-serviceScheme.set("toJSON", {
+contactUsScheme.set("toJSON", {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString();
     delete returnedObject._id;
@@ -23,4 +24,4 @@ serviceScheme.set("toJSON", {
   },
 });
 
-module.exports = mongoose.model("Services", serviceScheme);
+module.exports = mongoose.model("ContactUs", contactUsScheme);

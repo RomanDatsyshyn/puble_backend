@@ -10,7 +10,49 @@ router.get(
   userControllers.getUser
 );
 
-router.post("/send-code", userControllers.sendRecoveryCode);
+router.put(
+  "/updatePassword",
+  userMiddlewares.checkAccessToken,
+  userControllers.updatePassword
+);
+
+router.get(
+  "/history",
+  userMiddlewares.checkAccessToken,
+  userMiddlewares.getUserFromToken,
+  userControllers.getUserHistory
+);
+
+router.get("/getSpecialistsAroundMe", userControllers.getSpecialistsAroundMe);
+
+router.post(
+  "/updateHistory",
+  userMiddlewares.checkAccessToken,
+  userControllers.updateHistory
+);
+
+router.post(
+  "/deleteHistoryItem",
+  userMiddlewares.checkAccessToken,
+  userControllers.deleteHistoryItem
+);
+
+router.post(
+  "/addFeedBack",
+  userMiddlewares.checkAccessToken,
+  userControllers.addFeedBack
+);
+
+router.get(
+  "/getServiceSellerFeedBacks/:id",
+  userControllers.getServiceSellerFeedBacks
+);
+
+router.post(
+  "/send-code",
+  authMiddlewares.checkByEmailIsUserPresent,
+  userControllers.sendRecoveryCode
+);
 
 router.put(
   "/change-password",

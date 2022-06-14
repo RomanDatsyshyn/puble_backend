@@ -1,32 +1,24 @@
-const nodemailer = require("nodemailer");
+const nodeoutlook = require("nodejs-nodemailer-outlook");
 
 module.exports = async (res, email) => {
   const code = Math.floor(1000 + Math.random() * 9000);
 
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
+  nodeoutlook.sendEmail({
     auth: {
       user: process.env.EMAIL,
       pass: process.env.PASSWORD,
     },
-  });
-
-  const mailOptions = {
     from: process.env.EMAIL,
     to: email,
-    subject: "Your password recovery code",
-    text: `Code - ${code}`,
-  };
-
-  transporter.sendMail(mailOptions, (error) => {
-    if (error) {
-      console.log(error);
-    } else {
+    subject: "Ваш код відновлення паролю",
+    text: `Код - ${code}`,
+    onError: (e) => console.log(e),
+    onSuccess: () => {
       res.status(200).json({
         success: true,
         data: code,
         errors: null,
       });
-    }
+    },
   });
 };

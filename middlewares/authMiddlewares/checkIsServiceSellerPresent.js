@@ -5,8 +5,6 @@ module.exports = async (req, res, next) => {
 
   const serviceSeller = await ServiceSeller.findOne({ phone });
 
-  console.log(serviceSeller);
-
   if (!serviceSeller) {
     res.json({
       success: false,

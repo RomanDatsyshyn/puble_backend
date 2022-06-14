@@ -30,12 +30,20 @@ const userScheme = new Schema({
   },
   photo: {
     type: String,
-    required: true,
+    required: false,
   },
   feed: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Offers",
+      ref: "Orders",
+      required: false,
+    },
+  ],
+  history: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "UserHistory",
+      required: false,
     },
   ],
 });

@@ -17,17 +17,42 @@ router.put(
 );
 
 router.put(
-  "/add-category/:id",
+  "/updatePassword",
   serviceSellerMiddlewares.checkAccessToken,
-  serviceSellerMiddlewares.getServiceSellerFromToken,
-  serviceSellerControllers.addCategory
+  serviceSellerControllers.updatePassword
 );
 
 router.put(
-  "/delete-category/:id",
+  "/updatePhone",
+  serviceSellerMiddlewares.checkAccessToken,
+  authMiddlewares.checkIsPhoneUnique,
+  serviceSellerControllers.updatePhone
+);
+
+router.put(
+  "/updateTypeOfActivity",
+  serviceSellerMiddlewares.checkAccessToken,
+  serviceSellerControllers.updateTypeOfActivity
+);
+
+router.put(
+  "/updateMyContacts",
+  serviceSellerMiddlewares.checkAccessToken,
+  serviceSellerControllers.updateMyContacts
+);
+
+router.put(
+  "/addService/:id",
   serviceSellerMiddlewares.checkAccessToken,
   serviceSellerMiddlewares.getServiceSellerFromToken,
-  serviceSellerControllers.deleteCategory
+  serviceSellerControllers.addService
+);
+
+router.put(
+  "/deleteService/:id",
+  serviceSellerMiddlewares.checkAccessToken,
+  serviceSellerMiddlewares.getServiceSellerFromToken,
+  serviceSellerControllers.deleteService
 );
 
 router.delete(
@@ -36,6 +61,8 @@ router.delete(
   serviceSellerMiddlewares.getServiceSellerFromToken,
   serviceSellerControllers.deleteServiceSeller
 );
+
+router.post("/addPromo", serviceSellerControllers.createPromocode);
 
 router.post("/send-code", userControllers.sendRecoveryCode);
 

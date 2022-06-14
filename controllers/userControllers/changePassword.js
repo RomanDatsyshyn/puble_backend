@@ -7,7 +7,10 @@ module.exports = async (req, res) => {
 
     const hashedPassword = await passwordHasher(password);
 
-    await User.updateOne({ email }, { $set: { password: hashedPassword } });
+    await User.updateOne(
+      { email: email },
+      { $set: { password: hashedPassword } }
+    );
 
     res.status(200).end();
   } catch (e) {

@@ -6,6 +6,10 @@ const serviceSellerScheme = new Schema({
     type: String,
     require: true,
   },
+  kindOfActivity: {
+    type: String,
+    require: true,
+  },
   phone: {
     type: String,
     require: true,
@@ -32,10 +36,10 @@ const serviceSellerScheme = new Schema({
     type: String,
     required: true,
   },
-  categories: [
+  services: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Categories",
+      ref: "Services",
       required: false,
     },
   ],
@@ -45,9 +49,41 @@ const serviceSellerScheme = new Schema({
       ref: "Orders",
     },
   ],
+  Feedbacks: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Feedbacks",
+    },
+  ],
   rating: {
-    type: Number,
-    require: false,
+    sum: {
+      type: Number,
+      require: true,
+    },
+    amount: {
+      type: Number,
+      require: true,
+    },
+  },
+  instagram: {
+    type: String,
+    require: true,
+  },
+  telegram: {
+    type: String,
+    require: true,
+  },
+  viber: {
+    type: String,
+    require: true,
+  },
+  isVerified: {
+    type: Boolean,
+    require: true,
+  },
+  isPremiumActive: {
+    type: Boolean,
+    require: true,
   },
 });
 
