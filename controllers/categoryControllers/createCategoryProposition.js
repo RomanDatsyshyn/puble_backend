@@ -4,7 +4,7 @@ module.exports = async (req, res) => {
   try {
     const { name } = req.body;
 
-    const newCategoryProposition = new CategoryProposition(name);
+    const newCategoryProposition = new CategoryProposition({ name: name });
 
     await newCategoryProposition.save();
 

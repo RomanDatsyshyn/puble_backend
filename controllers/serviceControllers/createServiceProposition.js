@@ -4,7 +4,7 @@ module.exports = async (req, res) => {
   try {
     const { name } = req.body;
 
-    const newProposition = new ServiceProposition(name);
+    const newProposition = new ServiceProposition({ name: name });
 
     await newProposition.save();
 
