@@ -5,6 +5,8 @@ const { authMiddlewares } = require("../middlewares");
 
 router.get("/", categoryControllers.getAll);
 
+router.post("/addProposition", categoryControllers.createCategoryProposition);
+
 router.use(authMiddlewares.checkAdminToken);
 
 router.post("/", categoryControllers.addCategory);

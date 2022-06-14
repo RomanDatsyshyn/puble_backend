@@ -9,3 +9,5 @@ module.exports.ContactUs = require("./ContactUs");
 module.exports.OAuthToken = require("./OAuthToken");
 module.exports.UserHistory = require("./UserHistory");
 module.exports.ServiceSeller = require("./ServiceSeller");
+module.exports.ServiceProposition = require("./ServiceProposition");
+module.exports.CategoryProposition = require("./CategoryProposition");
