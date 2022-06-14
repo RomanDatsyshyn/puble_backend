@@ -5,7 +5,6 @@ module.exports = async (req, res) => {
     const { id } = req.params;
 
     const serviceSeller = await ServiceSeller.findById(req.user);
-
     serviceSeller.services = serviceSeller.services.filter((s) => s != id);
 
     await ServiceSeller.updateOne(
@@ -14,7 +13,6 @@ module.exports = async (req, res) => {
     );
 
     const serviceData = await Service.findById(id);
-
     serviceData.sellers = serviceData.sellers.filter((s) => s !== req.user);
 
     await Service.updateOne(
