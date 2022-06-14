@@ -23,6 +23,13 @@ router.put(
 );
 
 router.put(
+  "/updatePhone",
+  serviceSellerMiddlewares.checkAccessToken,
+  authMiddlewares.checkIsPhoneUnique,
+  serviceSellerControllers.updatePhone
+);
+
+router.put(
   "/updateTypeOfActivity",
   serviceSellerMiddlewares.checkAccessToken,
   serviceSellerControllers.updateTypeOfActivity

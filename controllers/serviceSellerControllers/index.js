@@ -1,4 +1,5 @@
 module.exports.addCategory = require("./addCategory");
+module.exports.updatePhone = require("./updatePhone");
 module.exports.changePassword = require("./changePassword");
 module.exports.updatePassword = require("./updatePassword");
 module.exports.deleteCategory = require("./deleteCategory");
