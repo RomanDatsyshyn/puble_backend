@@ -42,17 +42,17 @@ router.put(
 );
 
 router.put(
-  "/add-category/:id",
+  "/addService/:id",
   serviceSellerMiddlewares.checkAccessToken,
   serviceSellerMiddlewares.getServiceSellerFromToken,
-  serviceSellerControllers.addCategory
+  serviceSellerControllers.addService
 );
 
 router.put(
-  "/delete-category/:id",
+  "/deleteService/:id",
   serviceSellerMiddlewares.checkAccessToken,
   serviceSellerMiddlewares.getServiceSellerFromToken,
-  serviceSellerControllers.deleteCategory
+  serviceSellerControllers.deleteService
 );
 
 router.delete(

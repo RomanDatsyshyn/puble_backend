@@ -1,21 +1,19 @@
-const { ServiceSeller } = require("../../database/models");
+const { ServiceSeller, Service } = require("../../database/models");
 
 module.exports = async (req, res) => {
   try {
     const { id } = req.params;
 
     const serviceSeller = await ServiceSeller.findById(req.user);
-
-    serviceSeller.categories = serviceSeller.categories.filter((c) => c !== id);
+    serviceSeller.services = serviceSeller.services.concat(id);
 
     await ServiceSeller.updateOne(
       { _id: req.user },
-      { $set: { categories: serviceSeller.categories } }
+      { $set: { services: serviceSeller.services } }
     );
 
     const serviceData = await Service.findById(id);
-
-    serviceData.sellers = serviceData.sellers.filter((s) => s !== req.user);
+    serviceData.sellers = serviceData.sellers.concat(req.user);
 
     await Service.updateOne(
       { _id: serviceData._id },
@@ -26,7 +24,7 @@ module.exports = async (req, res) => {
   } catch (e) {
     res.json({
       success: false,
-      data: e.controller || "deleteCategoryOfServiceSeller",
+      data: e.controller || "addServiceOfServiceSeller",
       errors: e.message,
     });
   }
